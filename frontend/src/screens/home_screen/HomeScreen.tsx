@@ -6,6 +6,8 @@ import BaseScreen from '../../shared/components/screens/BaseScreen';
 import BaseAppBar from '../../shared/components/app_bars/BaseAppBar';
 import BaseBody from '../../shared/components/bodies/BaseBody';
 import Colors from '../../shared/design_system/Colors';
+import HomeScreenAppBar from './HomeScreenAppBar';
+import HomeScreenBody from './HomeScreenBody';
 
 const HomeScreen = () => {
   const styles = getStyleSheet();
@@ -13,40 +15,9 @@ const HomeScreen = () => {
   return (
     <BaseScreen>
       <HomeScreenAppBar />
-      <BaseBody>
-        <Text>Start</Text>
-      </BaseBody>
+      <HomeScreenBody />
     </BaseScreen>
   );
 }
-
-const HomeScreenAppBar = () => {
-  const styles = getStyleSheet();
-  const colorScheme = useColorScheme();
-  const iconSize = 50;
-  const iconColor = Colors.onBackground(colorScheme == 'dark');
-
-  return (
-    <BaseAppBar>
-      <Feather
-        name='sun'
-        size={iconSize}
-        color={iconColor}
-        onPress={() => {
-          Appearance.setColorScheme(
-            Appearance.getColorScheme() === 'dark' ? 'light' : 'dark',
-          );
-          console.log(Appearance.getColorScheme());
-        }}
-      />
-      <Text style={styles.boldLargeText}>R++</Text>
-      <Ionicons
-        name='add-circle'
-        size={iconSize}
-        color={iconColor}
-      />
-    </BaseAppBar>
-  );
-};
 
 export default HomeScreen;
