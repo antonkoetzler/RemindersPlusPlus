@@ -32,7 +32,7 @@ export default class UserSettings extends Model {
   toJson(): JSON {
     return {
       [UserSettings.darkModeEnabledJsonKey]: this.darkModeEnabled,
-      [UserSettings.loggedUserIdJsonKey]: this.loggedUserId,
+      [UserSettings.loggedUserIdJsonKey]: this.loggedUserId ?? '', // SQLite doesn't like null
     };
   }
 

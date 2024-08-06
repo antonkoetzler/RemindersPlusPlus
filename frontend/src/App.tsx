@@ -14,7 +14,6 @@ import { useEffect } from 'react';
 import Database from './shared/Database';
 import { container } from 'tsyringe';
 import UserSettingsService from './shared/services/UserSettingsService';
-import UserSettings from './shared/models/UserSettings';
 import { Appearance } from 'react-native';
 import SplashScreen from './core/components/screens/SplashScreen';
 import { Provider } from 'react-redux';
@@ -40,9 +39,7 @@ const App = () => {
     container.registerInstance(UserSettingsService, new UserSettingsService(database));
 
     /** Theme initialization */
-    Appearance.setColorScheme(
-      container.resolve(UserSettingsService).get()!.darkModeEnabled ? 'dark' : 'light',
-    );
+    Appearance.setColorScheme(container.resolve(UserSettingsService).get()!.darkModeEnabled ? 'dark' : 'light');
   }, []);
 
   if (!fontsLoaded) return <SplashScreen />;
