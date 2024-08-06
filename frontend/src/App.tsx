@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 import Database from './shared/Database';
 import { container } from 'tsyringe';
 import UserSettingsService from './shared/services/UserSettingsService';
-import { Appearance } from 'react-native';
+import { Appearance, LayoutAnimation, useColorScheme } from 'react-native';
 import SplashScreen from './core/components/screens/SplashScreen';
 import { Provider } from 'react-redux';
 import reduxStore from './shared/ReduxStore';

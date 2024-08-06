@@ -1,7 +1,5 @@
-import { Appearance, Text } from 'react-native';
+import { Text } from 'react-native';
 import Feather from '@expo/vector-icons/Feather';
-import { container } from 'tsyringe';
-import UserSettingsService from '../../shared/services/UserSettingsService';
 import getStyleSheet from '../../core/design_system/StyleSheet';
 import BaseAppBar from '../../core/components/app_bars/BaseAppBar';
 import Colors from '../../core/design_system/Colors';

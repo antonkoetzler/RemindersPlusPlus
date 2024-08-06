@@ -24,15 +24,17 @@ export default class UserSettings extends Model {
 
   static fromJson(json: JSON): UserSettings {
     return new UserSettings({
-      darkModeEnabled: json[UserSettings.darkModeEnabledJsonKey] == 1 ? true : false,
-      loggedUserId: json[UserSettings.loggedUserIdJsonKey],
+      darkModeEnabled: json[UserSettings.darkModeEnabledJsonKey] === 1 ? true : false,
+      loggedUserId: json[UserSettings.loggedUserIdJsonKey] !== ''
+        ? json[UserSettings.loggedUserIdJsonKey]
+        : null,
     });
   }
 
   toJson(): JSON {
     return {
       [UserSettings.darkModeEnabledJsonKey]: this.darkModeEnabled,
-      [UserSettings.loggedUserIdJsonKey]: this.loggedUserId ?? '', // SQLite doesn't like null
+      ...(this.loggedUserId != null && { [UserSettings.loggedUserIdJsonKey]: this.loggedUserId }),
     };
   }
 
