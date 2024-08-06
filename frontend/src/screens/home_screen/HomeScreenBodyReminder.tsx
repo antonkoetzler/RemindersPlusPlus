@@ -1,5 +1,5 @@
 import { Text } from 'react-native';
-import getStyleSheet from '../../shared/design_system/StyleSheet';
+import getStyleSheet from '../../core/design_system/StyleSheet';
 
 const HomeScreenBodyReminder = () => {
   const styles = getStyleSheet();

@@ -1,6 +1,6 @@
 import * as SQLite from 'expo-sqlite';
 import UserSettings from './models/UserSettings';
-import { JSON } from './types';
+import { JSON } from '../core/types';
 import DatabaseConditions from './models/DatabaseConditions';
 
 export default class Database {
@@ -40,18 +40,43 @@ export default class Database {
   }
 
   /** Get operation: Returns the first row of said table */
-  get = (table: string): JSON | null => Database.#instance.getFirstSync(`SELECT * FROM ${table}`);
+  get(table: string, conditions?: JSON): JSON | null {
+    const formattedConditions = conditions != null ? new DatabaseConditions(conditions) : null;
+
+    return Database.#instance.getFirstSync(
+      `SELECT * FROM ${table}`,
+      conditions ?? {},
+    );
+  }
 
   /** INSERT query. Returns the ID of the created object or [null] if unsuccessful */
   insert(table: string, data: JSON): number | null {
     const formattedConditions = new DatabaseConditions(data);
 
     const statement = Database.#instance.prepareSync(
-      `INSERT INTO ${table} (${formattedConditions.atributesToString()}) VALUES (${formattedConditions.placeholdersString()})`,
+      `INSERT INTO ${table} (${formattedConditions.atributesToString()}) VALUES (${formattedConditions.placeholdersToString()})`,
     );
 
     statement.executeSync(formattedConditions.values);
 
     return null;
+  }
+
+  /** UPDATE query. Returns the new row or [null] is unsuccessful */
+  update(table: string, data: JSON, conditions?: JSON): JSON | null {
+    const formattedData = new DatabaseConditions(data).atributesAndValuesToString();
+    const formattedConditions = conditions != null ? new DatabaseConditions(conditions).atributesAndValuesToString : null;
+
+    try {
+      const statement = Database.#instance.prepareSync(
+        `UPDATE ${table} SET ${formattedData}${formattedConditions != null ? ` WHERE ${formattedConditions}` : ''}`,
+      );
+
+      const id = statement.executeSync().lastInsertRowId;
+
+      return this.get(table, { id: id });
+    } catch (error) {
+      return null;
+    }
   }
 }

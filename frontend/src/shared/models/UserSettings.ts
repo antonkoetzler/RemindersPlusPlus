@@ -1,5 +1,5 @@
-import Model from '../abstracts/Model';
-import { JSON } from '../types';
+import Model from '../../core/abstracts/Model';
+import { JSON } from '../../core/types';
 
 export default class UserSettings extends Model {
   static darkModeEnabledJsonKey: string = 'dark_mode_enabled';
@@ -22,12 +22,33 @@ export default class UserSettings extends Model {
 
   static default = (): UserSettings => new UserSettings({ darkModeEnabled: true });
 
+  static fromJson(json: JSON): UserSettings {
+    return new UserSettings({
+      darkModeEnabled: json[UserSettings.darkModeEnabledJsonKey] == 1 ? true : false,
+      loggedUserId: json[UserSettings.loggedUserIdJsonKey],
+    });
+  }
+
   toJson(): JSON {
     return {
       [UserSettings.darkModeEnabledJsonKey]: this.darkModeEnabled,
       [UserSettings.loggedUserIdJsonKey]: this.loggedUserId,
     };
   }
+
+  copyWith({
+    darkModeEnabled,
+    loggedUserId,
+  }: {
+    darkModeEnabled?: boolean,
+    loggedUserId?: number,
+  }): UserSettings {
+    return new UserSettings({
+      darkModeEnabled: darkModeEnabled ?? this.darkModeEnabled,
+      loggedUserId: loggedUserId ?? this.loggedUserId,
+    });
+  }
+
 
   toString(): string {
     return `UserSettings(

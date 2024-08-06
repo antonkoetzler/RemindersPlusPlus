@@ -1,5 +1,6 @@
-import Model from '../abstracts/Model';
-import { JSON } from '../types';
+import Model from '../../core/abstracts/Model';
+import { UnimplementedError } from '../../core/misc/Errors';
+import { JSON } from '../../core/types';
 
 /**
  * Model to create condition data for [Database] queries
@@ -46,6 +47,7 @@ export default class DatabaseConditions extends Model {
     );`;
   }
 
+  /** i.e. 'atributeOne, atributeTwo' */
   atributesToString(): string {
     let result: string = '';
 
@@ -59,7 +61,8 @@ export default class DatabaseConditions extends Model {
     return result;
   }
 
-  placeholdersString(): string {
+  /** i.e. '?, ?' */
+  placeholdersToString(): string {
     let result: string = '';
 
     for (let i = 0; i < this.atributes.length; i++) {
@@ -71,4 +74,21 @@ export default class DatabaseConditions extends Model {
 
     return result;
   }
+
+  /** i.e. 'atributeOne = 1, atributeTwo = 2' */
+  atributesAndValuesToString(): string {
+    let result: string = '';
+
+    for (let i = 0; i < this.atributes.length; i++) {
+      result += `${this.atributes[i]} = ${this.values[i] ?? ''}`;
+      if (i != this.atributes.length - 1) {
+        result += ', ';
+      }
+    }
+
+    return result;
+  }
+
+  copyWith(): DatabaseConditions { throw new UnimplementedError(); }
+  toJson(): JSON { throw new UnimplementedError() }
 }

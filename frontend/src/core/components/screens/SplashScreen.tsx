@@ -8,7 +8,11 @@ const SplashScreen = () => {
     <View
       style={[
         styles.background,
-        { flex: 1 },
+        {
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
       ]}
     >
       <Text style={styles.boldLargeText}>Reminders++ Loading</Text>

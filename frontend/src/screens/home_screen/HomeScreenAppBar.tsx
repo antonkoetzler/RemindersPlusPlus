@@ -1,10 +1,15 @@
 import { Appearance, Text } from 'react-native';
-import BaseAppBar from '../../shared/components/app_bars/BaseAppBar';
-import Colors from '../../shared/design_system/Colors';
-import getStyleSheet from '../../shared/design_system/StyleSheet';
 import Feather from '@expo/vector-icons/Feather';
+import { container } from 'tsyringe';
+import UserSettingsService from '../../shared/services/UserSettingsService';
+import getStyleSheet from '../../core/design_system/StyleSheet';
+import BaseAppBar from '../../core/components/app_bars/BaseAppBar';
+import Colors from '../../core/design_system/Colors';
+import { useDispatch } from 'react-redux';
+import { toggleDarkMode } from '../../shared/reducers/UserSettingsReducer';
 
 const HomeScreenAppBar = () => {
+  const dispatch = useDispatch();
   const styles = getStyleSheet();
   const iconSize = 50;
   const iconColor = Colors.onBackground();
@@ -15,12 +20,7 @@ const HomeScreenAppBar = () => {
         name='sun'
         size={iconSize}
         color={iconColor}
-        onPress={() => {
-          Appearance.setColorScheme(
-            Appearance.getColorScheme() === 'dark' ? 'light' : 'dark',
-          );
-          console.log(Appearance.getColorScheme());
-        }}
+        onPress={() => dispatch(toggleDarkMode())}
       />
       <Text style={styles.boldLargeText}>R++</Text>
       <Feather

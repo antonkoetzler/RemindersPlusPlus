@@ -6,8 +6,7 @@ import {
   Ubuntu_400Regular_Italic,
   Ubuntu_700Bold,
 } from '@expo-google-fonts/ubuntu';
-import SplashScreen from './shared/components/screens/SplashScreen';
-import suppressWarnings from './shared/misc/Warnings';
+import suppressWarnings from './core/misc/Warnings';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './screens/home_screen/HomeScreen';
@@ -15,6 +14,11 @@ import { useEffect } from 'react';
 import Database from './shared/Database';
 import { container } from 'tsyringe';
 import UserSettingsService from './shared/services/UserSettingsService';
+import UserSettings from './shared/models/UserSettings';
+import { Appearance } from 'react-native';
+import SplashScreen from './core/components/screens/SplashScreen';
+import { Provider } from 'react-redux';
+import reduxStore from './shared/ReduxStore';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,17 +38,23 @@ const App = () => {
 
     /** IoC container initialization */
     container.registerInstance(UserSettingsService, new UserSettingsService(database));
-    container.resolve(UserSettingsService).get();
+
+    /** Theme initialization */
+    Appearance.setColorScheme(
+      container.resolve(UserSettingsService).get()!.darkModeEnabled ? 'dark' : 'light',
+    );
   }, []);
 
   if (!fontsLoaded) return <SplashScreen />;
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name='Home' component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={reduxStore}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name='Home' component={HomeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

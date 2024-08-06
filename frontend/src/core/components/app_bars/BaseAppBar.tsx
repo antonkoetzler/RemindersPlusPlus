@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { View } from 'react-native';
 import BaseDivider from '../dividers/BaseDivider';
-import DirectionEnum from '../../enums/DirectionEnum';
+import DirectionEnum from '../../../core/enums/DirectionEnum';
 
 interface BaseAppBarProps {
   children: ReactNode;

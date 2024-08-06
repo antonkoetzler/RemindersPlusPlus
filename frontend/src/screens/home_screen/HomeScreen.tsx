@@ -1,5 +1,5 @@
-import getStyleSheet from '../../shared/design_system/StyleSheet';
-import BaseScreen from '../../shared/components/screens/BaseScreen';
+import BaseScreen from '../../core/components/screens/BaseScreen';
+import getStyleSheet from '../../core/design_system/StyleSheet';
 import HomeScreenAppBar from './HomeScreenAppBar';
 import HomeScreenBody from './HomeScreenBody';
 

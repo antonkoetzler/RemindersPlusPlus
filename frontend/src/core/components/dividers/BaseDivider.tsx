@@ -1,5 +1,5 @@
 import { useColorScheme, View } from 'react-native';
-import DirectionEnum from '../../enums/DirectionEnum';
+import DirectionEnum from '../../../core/enums/DirectionEnum';
 import Colors from '../../design_system/Colors';
 
 interface BaseDividerProps {

@@ -1,8 +1,9 @@
-import CrudService from '../interfaces/CrudService';
 import UserSettings from '../models/UserSettings';
-import { UnimplementedError } from '../misc/Errors';
+import { UnimplementedError } from '../../core/misc/Errors';
 import { injectable } from 'tsyringe';
 import Database from '../Database';
+import { JSON } from '../../core/types';
+import CrudService from '../../core/interfaces/CrudService';
 
 @injectable()
 export default class UserSettingsService implements CrudService<UserSettings> {
@@ -15,11 +16,19 @@ export default class UserSettingsService implements CrudService<UserSettings> {
   create(): UserSettings | null { throw new UnimplementedError(); }
 
   get(): UserSettings | null {
-    console.log('We are here');
-    return null;
+    return UserSettings.fromJson(this.database.get(Database.userSettingsTableName)!);
   }
 
   select(): UserSettings[] { throw new UnimplementedError(); }
-  update(): UserSettings | null { throw new UnimplementedError(); }
+
+  update(userSettings: UserSettings): UserSettings | null {
+    const json: JSON = this.database.update(
+      Database.userSettingsTableName,
+      userSettings.toJson(),
+    )!;
+
+    return UserSettings.fromJson(json);
+  }
+
   delete(): boolean { throw new UnimplementedError(); }
 }

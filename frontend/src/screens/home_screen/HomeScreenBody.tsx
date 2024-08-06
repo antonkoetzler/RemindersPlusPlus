@@ -1,6 +1,6 @@
 import { FlatList } from 'react-native';
-import BaseBody from '../../shared/components/bodies/BaseBody';
 import HomeScreenBodyReminder from './HomeScreenBodyReminder';
+import BaseBody from '../../core/components/bodies/BaseBody';
 
 const HomeScreenBody = () => {
   return (
