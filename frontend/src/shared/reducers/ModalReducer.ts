@@ -1,23 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ReactNode } from 'react';
+import MenuItem from '../models/MenuItem';
 
 interface StateInterface {
   isVisible: boolean;
-  content: ReactNode | null;
+  items: MenuItem[] | null;
 }
 
-const initialState = {
+const initialState: StateInterface = {
   isVisible: false,
-  content: null,
+  items: null,
 };
 
 const modalSlice = createSlice({
   name: 'modalSlice',
   initialState: initialState,
   reducers: {
-    showModal: (state, action) => {
+    showModal: (state, action: PayloadAction<MenuItem[]>) => {
       state.isVisible = true;
-      state.content = action.payload;
+      state.items = action.payload;
     },
     hideModal: (state) => {
       state.isVisible = false;

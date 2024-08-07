@@ -6,6 +6,7 @@ import Colors from '../../core/design_system/Colors';
 import UserSettingsHelper from '../../shared/helpers/UserSettingsHelper';
 import { useDispatch } from 'react-redux';
 import { showModal } from '../../shared/reducers/ModalReducer';
+import MenuItem from '../../shared/models/MenuItem';
 
 const HomeScreenAppBar = () => {
   const styles = getStyleSheet();
@@ -26,7 +27,20 @@ const HomeScreenAppBar = () => {
         name='menu'
         size={iconSize}
         color={iconColor}
-        onPress={() => dispatch(showModal(<Text style={{ padding: 50, backgroundColor: 'red' }}>Working</Text>))}
+        onPress={
+          () => dispatch(
+            showModal([
+              new MenuItem({
+                text: 'Create reminder',
+                onPress: () => console.log('Working'),
+              }),
+              new MenuItem({
+                text: 'About Reminders++',
+                onPress: () => console.log('woqkwe'),
+              }),
+            ])
+          )
+        }
       />
     </BaseAppBar>
   );

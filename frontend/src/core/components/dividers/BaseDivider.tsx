@@ -1,4 +1,4 @@
-import { useColorScheme, View } from 'react-native';
+import { View } from 'react-native';
 import DirectionEnum from '../../../core/enums/DirectionEnum';
 import Colors from '../../design_system/Colors';
 

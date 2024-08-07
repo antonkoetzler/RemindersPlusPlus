@@ -1,13 +1,9 @@
-import { ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import { View } from 'react-native';
 import BaseDivider from '../dividers/BaseDivider';
 import DirectionEnum from '../../../core/enums/DirectionEnum';
 
-interface BaseAppBarProps {
-  children: ReactNode;
-};
-
-const BaseAppBar = ({ children }: BaseAppBarProps) => {
+const BaseAppBar: FC<{ children?: ReactNode }> = ({ children }) => {
   return (
     <View>
       <View
@@ -17,9 +13,7 @@ const BaseAppBar = ({ children }: BaseAppBarProps) => {
           paddingHorizontal: 10,
           paddingBottom: 10,
         }}
-      >
-        {children}
-      </View>
+      >{children}</View>
       <BaseDivider direction={DirectionEnum.horizontal} />
     </View>
   );

@@ -1,15 +1,11 @@
-import { ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import { Appearance, SafeAreaView, StatusBar } from 'react-native';
 import getStyleSheet from '../../design_system/StyleSheet';
 import Colors from '../../design_system/Colors';
 import BaseModal from '../modals/BaseModal';
 
-interface BaseScreenProps {
-  children: ReactNode;
-};
-
 /** Must be used to make every screen component */
-const BaseScreen = ({ children }: BaseScreenProps) => {
+const BaseScreen: FC<{ children?: ReactNode }> = ({ children }) => {
   const styles = getStyleSheet();
   const isDarkMode = Appearance.getColorScheme() == 'dark';
 
