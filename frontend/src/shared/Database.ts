@@ -68,7 +68,6 @@ export default class Database {
     const formattedConditions = conditions != null ? new DatabaseConditions(conditions).atributesAndValuesToString : null;
 
     try {
-      console.log(`UPDATE ${table} SET ${formattedData}${formattedConditions != null ? ` WHERE ${formattedConditions}` : ''}`);
       const statement = Database.#instance.prepareSync(
         `UPDATE ${table} SET ${formattedData}${formattedConditions != null ? ` WHERE ${formattedConditions}` : ''}`,
       );
