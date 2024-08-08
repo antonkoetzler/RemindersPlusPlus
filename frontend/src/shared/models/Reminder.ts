@@ -1,6 +1,7 @@
+import { faker } from '@faker-js/faker';
 import Model from '../../core/abstracts/Model';
-import ReminderPriorityEnum from '../../core/enums/ReminderPriorityEnum';
 import { JSON } from '../../core/types';
+import ReminderPriority from './ReminderPriority';
 
 export default class Reminder extends Model {
   static nameJsonKey: string = 'name';
@@ -11,7 +12,7 @@ export default class Reminder extends Model {
 
   readonly name: string;
   readonly description: string;
-  readonly priority: ReminderPriorityEnum;
+  readonly priority: ReminderPriority;
   readonly remindAt: Date;
   readonly createdAt: Date;
 
@@ -24,7 +25,7 @@ export default class Reminder extends Model {
   }: {
     name: string,
     description: string,
-    priority: ReminderPriorityEnum,
+    priority: ReminderPriority,
     remindAt: Date,
     createdAt: Date,
   }) {
@@ -34,6 +35,16 @@ export default class Reminder extends Model {
     this.priority = priority;
     this.remindAt = remindAt;
     this.createdAt = createdAt;
+  }
+
+  static fake(): Reminder {
+    return new Reminder({
+      name: faker.string.sample(100),
+      description: faker.string.sample(100),
+      priority: ReminderPriority.fake(),
+      remindAt: faker.date.anytime(),
+      createdAt: faker.date.anytime(),
+    });
   }
 
   static fromJson(json: JSON): Reminder {
@@ -65,7 +76,7 @@ export default class Reminder extends Model {
   }: {
     name: string,
     description: string,
-    priority: ReminderPriorityEnum,
+    priority: ReminderPriority,
     remindAt: Date,
     createdAt: Date,
   }) {
@@ -87,4 +98,7 @@ export default class Reminder extends Model {
       createdAt: ${this.createdAt},
     );`;
   }
+
+  formattedRemindAt = (): string => this.remindAt.toLocaleDateString();
+  formattedCreatedAt = (): string => this.createdAt.toLocaleDateString();
 }

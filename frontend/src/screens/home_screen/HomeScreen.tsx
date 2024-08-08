@@ -1,10 +1,12 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import BaseScreen from '../../core/components/screens/BaseScreen';
-import getStyleSheet from '../../core/design_system/StyleSheet';
 import HomeScreenAppBar from './HomeScreenAppBar';
 import HomeScreenBody from './HomeScreenBody';
-import { Text } from 'react-native';
+import { ParamListBase } from '@react-navigation/native';
 
-const HomeScreen = () => {
+type HomeScreenProps = NativeStackScreenProps<ParamListBase, 'Home'>;
+
+const HomeScreen = ({ navigation }: HomeScreenProps) => {
   return (
     <BaseScreen>
       <HomeScreenAppBar />

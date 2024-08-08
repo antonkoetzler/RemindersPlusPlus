@@ -1,24 +1,38 @@
 import { FlatList } from 'react-native';
 import HomeScreenBodyReminder from './HomeScreenBodyReminder';
 import BaseBody from '../../core/components/bodies/BaseBody';
+import Reminder from '../../shared/models/Reminder';
 
 const HomeScreenBody = () => {
   return (
     <BaseBody>
       <FlatList
         data={[
-          { key: 'Devin' },
-          { key: 'Dan' },
-          { key: 'Dominic' },
-          { key: 'Jackson' },
-          { key: 'James' },
-          { key: 'Joel' },
-          { key: 'John' },
-          { key: 'Jillian' },
-          { key: 'Jimmy' },
-          { key: 'Julie' },
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
+          Reminder.fake(),
         ]}
-        renderItem={({ item }) => <HomeScreenBodyReminder />}
+        renderItem={({ item }) => <HomeScreenBodyReminder reminder={item} />}
       />
     </BaseBody>
   );

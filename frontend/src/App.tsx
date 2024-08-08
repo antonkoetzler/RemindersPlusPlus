@@ -18,6 +18,7 @@ import { Appearance, LayoutAnimation, useColorScheme } from 'react-native';
 import SplashScreen from './core/components/screens/SplashScreen';
 import { Provider } from 'react-redux';
 import reduxStore from './shared/ReduxStore';
+import ReminderDetailsScreen from './screens/reminder_details_screen/ReminderDetailsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,7 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name='Home' component={HomeScreen} />
+          <Stack.Screen name='ReminderDetails' component={ReminderDetailsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

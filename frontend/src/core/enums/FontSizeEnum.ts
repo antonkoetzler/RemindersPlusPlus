@@ -1,7 +1,7 @@
 enum FontSizeEnum {
-  small = 20,
-  medium = 28,
-  large = 36,
+  small = 16,
+  medium = 24,
+  large = 32,
 }
 
 export default FontSizeEnum;

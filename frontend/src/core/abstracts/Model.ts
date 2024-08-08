@@ -3,6 +3,7 @@ import { JSON } from '../types';
 
 /** Abstract that every model must extend */
 export default abstract class Model {
+  static fake(): Model { throw new UnimplementedError(); }
   static fromJson(json: JSON): Model { throw new UnimplementedError(); }
   abstract toJson(): JSON;
   abstract copyWith({ }): Model;
