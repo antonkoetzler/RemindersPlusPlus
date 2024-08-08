@@ -2,3 +2,4 @@
 
 1. Remove the stock images that expo adds to projects
 2. Create the screen for viewing a reminder
+3. Get the typing of NaviationContext correct (don't use any)
