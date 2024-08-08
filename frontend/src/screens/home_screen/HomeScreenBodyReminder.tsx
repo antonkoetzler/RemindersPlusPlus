@@ -2,12 +2,14 @@ import { Dimensions, Text, TouchableWithoutFeedback, View } from 'react-native';
 import getStyleSheet from '../../core/design_system/StyleSheet';
 import Reminder from '../../shared/models/Reminder';
 import { UnimplementedError } from '../../core/misc/Errors';
+import { useNavigationContext } from '../../shared/contexts/NavigationContext';
 
 const HomeScreenBodyReminder = ({ reminder }: { reminder: Reminder }) => {
   const styles = getStyleSheet();
+  const navigation = useNavigationContext();
 
   return (
-    <TouchableWithoutFeedback onPress={() => { throw new UnimplementedError() }}>
+    <TouchableWithoutFeedback onPress={() => navigation.navigate('ReminderDetails')}>
       <View
         style={{
           padding: 10,

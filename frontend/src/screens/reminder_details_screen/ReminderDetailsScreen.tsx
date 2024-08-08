@@ -1,15 +1,15 @@
-import { View, Text } from 'react-native';
+import { ParamListBase } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import BaseScreen from '../../core/components/screens/BaseScreen';
+import ReminderDetailsScreenAppBar from './ReminderDetailsScreenAppBar';
 
-const ReminderDetailsScreen = () => {
+type ReminderDetailsScreenProps = NativeStackScreenProps<ParamListBase, 'ReminderDetails'>
+
+const ReminderDetailsScreen = ({ navigation }: ReminderDetailsScreenProps) => {
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: 'green',
-      }}
-    >
-      <Text>Start</Text>
-    </View>
+    <BaseScreen>
+      <ReminderDetailsScreenAppBar />
+    </BaseScreen>
   );
 };
 

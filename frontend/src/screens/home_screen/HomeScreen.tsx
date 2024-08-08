@@ -3,15 +3,18 @@ import BaseScreen from '../../core/components/screens/BaseScreen';
 import HomeScreenAppBar from './HomeScreenAppBar';
 import HomeScreenBody from './HomeScreenBody';
 import { ParamListBase } from '@react-navigation/native';
+import { NavigationProvider } from '../../shared/contexts/NavigationContext';
 
 type HomeScreenProps = NativeStackScreenProps<ParamListBase, 'Home'>;
 
 const HomeScreen = ({ navigation }: HomeScreenProps) => {
   return (
-    <BaseScreen>
-      <HomeScreenAppBar />
-      <HomeScreenBody />
-    </BaseScreen>
+    <NavigationProvider navigation={navigation}>
+      <BaseScreen>
+        <HomeScreenAppBar />
+        <HomeScreenBody />
+      </BaseScreen>
+    </NavigationProvider>
   );
 }
 
