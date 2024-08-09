@@ -1,14 +1,18 @@
-import { ParamListBase } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RouteProp, useRoute } from '@react-navigation/native';
 import BaseScreen from '../../core/components/screens/BaseScreen';
 import ReminderDetailsScreenAppBar from './ReminderDetailsScreenAppBar';
+import { RootStackParamList } from '../../core/types';
+import ReminderDetailsScreenBody from './ReminderDetailScreenBody';
 
-type ReminderDetailsScreenProps = NativeStackScreenProps<ParamListBase, 'ReminderDetails'>
+const ReminderDetailsScreen = () => {
+  const reminderId = useRoute<RouteProp<RootStackParamList>>().params!.reminderId;
 
-const ReminderDetailsScreen = ({ navigation }: ReminderDetailsScreenProps) => {
+  console.log(reminderId);
+
   return (
     <BaseScreen>
       <ReminderDetailsScreenAppBar />
+      <ReminderDetailsScreenBody />
     </BaseScreen>
   );
 };

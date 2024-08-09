@@ -4,12 +4,14 @@ import { JSON } from '../../core/types';
 import ReminderPriority from './ReminderPriority';
 
 export default class Reminder extends Model {
+  static idJsonKey: string = 'id';
   static nameJsonKey: string = 'name';
   static descriptionJsonKey: string = 'description';
   static priorityJsonKey: string = 'priority';
   static remindAtJsonKey: string = 'remind_at';
   static createdAtJsonKey: string = 'created_at';
 
+  readonly id: number;
   readonly name: string;
   readonly description: string;
   readonly priority: ReminderPriority;
@@ -17,12 +19,14 @@ export default class Reminder extends Model {
   readonly createdAt: Date;
 
   constructor({
+    id,
     name,
     description,
     priority,
     remindAt,
     createdAt,
   }: {
+    id: number,
     name: string,
     description: string,
     priority: ReminderPriority,
@@ -30,6 +34,7 @@ export default class Reminder extends Model {
     createdAt: Date,
   }) {
     super();
+    this.id = id;
     this.name = name;
     this.description = description;
     this.priority = priority;
@@ -39,6 +44,7 @@ export default class Reminder extends Model {
 
   static fake(): Reminder {
     return new Reminder({
+      id: faker.number.int(),
       name: faker.string.sample(100),
       description: faker.string.sample(100),
       priority: ReminderPriority.fake(),
@@ -49,6 +55,7 @@ export default class Reminder extends Model {
 
   static fromJson(json: JSON): Reminder {
     return new Reminder({
+      id: json[Reminder.idJsonKey],
       name: json[Reminder.nameJsonKey],
       description: json[Reminder.descriptionJsonKey],
       priority: json[Reminder.priorityJsonKey],
@@ -68,29 +75,33 @@ export default class Reminder extends Model {
   }
 
   copyWith({
+    id,
     name,
     description,
     priority,
     remindAt,
     createdAt,
   }: {
-    name: string,
-    description: string,
-    priority: ReminderPriority,
-    remindAt: Date,
-    createdAt: Date,
+    id?: number
+    name?: string,
+    description?: string,
+    priority?: ReminderPriority,
+    remindAt?: Date,
+    createdAt?: Date,
   }) {
     return new Reminder({
-      name: name,
-      description: description,
-      priority: priority,
-      remindAt: remindAt,
-      createdAt: createdAt,
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      priority: priority ?? this.priority,
+      remindAt: remindAt ?? this.remindAt,
+      createdAt: createdAt ?? this.createdAt,
     });
   }
 
   toString(): string {
     return `Reminder(
+      id: ${this.id},
       name: ${this.name},
       description: ${this.description},
       priority: ${this.priority},

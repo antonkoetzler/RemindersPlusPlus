@@ -1,10 +1,23 @@
 import BaseAppBar from '../../core/components/app_bars/BaseAppBar';
-import { Text } from 'react-native';
+import AntDesign from '@expo/vector-icons/AntDesign';
+import Colors from '../../core/design_system/Colors';
 
 const ReminderDetailsScreenAppBar = () => {
+  const iconSize = 50;
+  const iconColor = Colors.onBackground();
+
   return (
     <BaseAppBar>
-      <Text style={{ color: 'gray' }}>Start</Text>
+      <AntDesign
+        name='check'
+        size={iconSize}
+        color={iconColor}
+      />
+      <AntDesign
+        name='close'
+        size={iconSize}
+        color={iconColor}
+      />
     </BaseAppBar>
   );
 };
